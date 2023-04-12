@@ -1,0 +1,5 @@
+.log/
+.zsh_history*
+.bash_history
+catkin_workspace/
+.config

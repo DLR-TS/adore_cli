@@ -1,0 +1,15 @@
+[submodule "make_gadgets"]
+	path = make_gadgets
+	url = git@github.com:DLR-TS/make_gadgets.git
+[submodule "catkin_docker"]
+	path = catkin_docker
+	url = git@github.com:DLR-TS/catkin_docker.git
+[submodule "plotlabserver"]
+	path = plotlabserver
+	url = git@github.com:DLR-TS/plotlabserver.git
+[submodule "apt_cacher_ng_docker"]
+	path = apt_cacher_ng_docker
+	url = git@github.com:DLR-TS/apt_cacher_ng_docker.git
+[submodule "adore_if_ros"]
+	path = adore_if_ros
+	url = git@github.com:DLR-TS/adore_if_ros.git
