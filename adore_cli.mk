@@ -98,12 +98,12 @@ build_adore-cli: clean_adore-cli ## Builds the ADORe CLI docker context/image
 	cd ${ADORE_CLI_SUBMODULES_PATH}/apt_cacher_ng_docker && make up
 	cd ${ADORE_CLI_SUBMODULES_PATH}/plotlabserver && make build_fast_plotlabserver
 	cd "${ADORE_CLI_MAKEFILE_PATH}" && \
-    docker compose build ${ADORE_CLI_PROJECT} \
+    docker compose -f ${DOCKER_COMPOSE_FILE} build ${ADORE_CLI_PROJECT} \
                          --build-arg UID=${UID} \
                          --build-arg GID=${GID} \
                          --build-arg DOCKER_GID=${DOCKER_GID} \
                          --build-arg ADORE_IF_ROS_TAG=${ADORE_IF_ROS_TAG} && \
-    docker compose build adore-cli_x11-display \
+    docker compose -f ${DOCKER_COMPOSE_FILE} build adore-cli_x11-display \
                          --build-arg UID=${UID} \
                          --build-arg GID=${GID} \
                          --build-arg DOCKER_GID=${DOCKER_GID} \
@@ -151,7 +151,7 @@ adore-cli_start:
 	@echo "Running adore-cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 	cd ${ADORE_CLI_MAKEFILE_PATH} && \
     xhost + && \
-    docker compose up adore-cli_x11-display \
+    docker compose -f ${DOCKER_COMPOSE_FILE} up adore-cli_x11-display \
       --force-recreate \
       --renew-anon-volumes \
       --detach; \
