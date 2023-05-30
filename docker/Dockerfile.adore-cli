@@ -41,7 +41,7 @@ RUN apt-get update && \
 
 USER ${USER}
 WORKDIR /home/${USER}
-RUN zsh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" ||true
+RUN zsh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
 

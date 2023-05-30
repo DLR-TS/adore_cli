@@ -55,7 +55,14 @@ export CATKIN_SHELL=sh
 #echo " SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 #echo " ADORE_CLI_WORKING_DIRECTORY: ${ADORE_CLI_WORKING_DIRECTORY}"
 #echo " CATKIN_WORKSPACE_DIRECTORY: ${CATKIN_WORKSPACE_DIRECTORY}"
-source "${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh"
+
+if ! [[ -f ${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh ]]; then
+    echoerr "ERROR: The catkin workspace environmental script not found: ${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh"
+    echoerr "  run 'make create_catkin_worksapce' to generate a catkin workspace and try again."
+    echo ""
+    exit 1
+fi
+source "${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh" || true
 
 cd "${ADORE_CLI_WORKING_DIRECTORY}"
 
