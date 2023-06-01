@@ -95,27 +95,11 @@ build_fast_adore-cli: # build the adore-cli conte does not already exist in the 
 
 .PHONY: build_adore-cli
 build_adore-cli: clean_adore-cli ## Builds the ADORe CLI docker context/image
-	cd ${ADORE_CLI_SUBMODULES_PATH}/apt_cacher_ng_docker && make up
-	cd ${ADORE_CLI_SUBMODULES_PATH}/plotlabserver && make build_fast_plotlabserver
-	cd "${ADORE_CLI_MAKEFILE_PATH}" && \
-    docker compose -f ${DOCKER_COMPOSE_FILE} build ${ADORE_CLI_PROJECT} \
-                         --build-arg UID=${UID} \
-                         --build-arg GID=${GID} \
-                         --build-arg DOCKER_GID=${DOCKER_GID} \
-                         --build-arg ADORE_IF_ROS_TAG=${ADORE_IF_ROS_TAG} && \
-    docker compose -f ${DOCKER_COMPOSE_FILE} build adore-cli_x11-display \
-                         --build-arg UID=${UID} \
-                         --build-arg GID=${GID} \
-                         --build-arg DOCKER_GID=${DOCKER_GID} \
-                         --build-arg ADORE_CLI_TAG=${ADORE_CLI_TAG}
+	cd "${ADORE_CLI_MAKEFILE_PATH}" && make build 
 
 .PHONY: clean_adore-cli 
 clean_adore-cli: ## Clean adore-cli docker context 
-	docker rm $$(docker ps -a -q --filter "ancestor=${CATKIN_BASE_PROJECT}:${ADORE_CLI_TAG}") --force 2> /dev/null || true
-	docker rm $$(docker ps -a -q --filter "ancestor=${CATKIN_BASE_PROJECT}_x11-display:${ADORE_CLI_TAG}") --force 2> /dev/null || true
-	docker rmi $$(docker images -q ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG}) --force 2> /dev/null || true
-	docker rmi $$(docker images -q ${ADORE_CLI_PROJECT}_x11-display:${ADORE_CLI_TAG}) --force 2> /dev/null || true
-	docker rmi $$(docker images --filter "dangling=true" -q) --force > /dev/null 2>&1 || true
+	cd "${ADORE_CLI_MAKEFILE_PATH}" && make clean
 
 .PHONY: run_test_scenarios_headless
 run_test_scenarios_headless:# run headless test scenarios 
