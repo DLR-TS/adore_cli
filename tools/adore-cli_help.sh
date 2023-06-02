@@ -26,7 +26,6 @@ printf "\n"
 
 printf "  Getting Started:\n\n"
 printf "    To execute a scenario run the following commands: \n"
-printf "      cd adore_if_ros_demos \n"
 printf "      roslaunch <scenario name> example: roslaunch baseline_test.launch\n\n"
 
 printf "    To attach another termanal session to the ADORe cli at any time on the host you can run: \n"

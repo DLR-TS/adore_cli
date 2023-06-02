@@ -51,8 +51,7 @@ printf " done \n"
 source "${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh"
 
 
-
-cd "${SOURCE_DIRECTORY}/adore_if_ros_demos"
+cd "${ADORE_CLI_WORKING_DIRECTORY}"
 
 for test_scenario in $TEST_SCENARIOS; do
     if [[ ! -f "${test_scenario}" ]]; then
@@ -73,5 +72,5 @@ for test_scenario in $TEST_SCENARIOS; do
     mkdir -p "${LOG_DIR}/${scenario_name}/.ros"
     cp -r "${ROS_LOG_DIR}/${scenario_name}"/* "${scenario_log_dir}/.ros/"
     (cd "${PLOTLABSERVER_LOG_DIR}" && cp -r * "${scenario_log_dir}/plotlabserver")
-    cd "${scenario_log_dir}" && ln -s .ros ros_logs
+    cd "${scenario_log_dir}" && ln -sf .ros ros_logs
 done

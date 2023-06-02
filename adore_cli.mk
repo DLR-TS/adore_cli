@@ -35,7 +35,7 @@ UID := $(shell id -u)
 GID := $(shell id -g)
 
 
-TEST_SCENARIOS?=baseline_test.launch
+TEST_SCENARIOS?=adore_scenarios/baseline_test.launch
 
 
 include ${MAKE_GADGETS_PATH}/make_gadgets.mk
@@ -143,7 +143,7 @@ adore-cli_start:
 
 .PHONY: adore-cli_start_headless
 adore-cli_start_headless:
-	DISPLAY_MODE=headless && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore-cli_start 
+	export DISPLAY_MODE=headless && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore-cli_start 
 
 .PHONY: adore-cli_attach
 adore-cli_attach:
