@@ -23,6 +23,8 @@ endif
 
 ADORE_CLI_TAG:=$(shell cd "${MAKE_GADGETS_PATH}" && make get_sanitized_branch_name REPO_DIRECTORY="${ADORE_CLI_MAKEFILE_PATH}")
 ADORE_CLI_IMAGE:=${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG}
+ADORE_CLI_PROJECT_X11_DISPLAY:=${ADORE_CLI_PROJECT}_x11-display
+ADORE_CLI_IMAGE_X11_DISPLAY:=${ADORE_CLI_PROJECT_X11_DISPLAY}:${ADORE_CLI_TAG}
 
 SOURCE_DIRECTORY?=${REPO_DIRECTORY}
 
@@ -164,5 +166,13 @@ run_test_scenarios: adore-cli_setup adore-cli_start_headless adore-cli_scenarios
 	@echo "      make run_test_scenarios DISPLAY_MODE=native TEST_SCENARIOS=baseline_test.launch"
 	@echo "      make run_test_scenarios DISPLAY_MODE=window_manager TEST_SCENARIOS=baseline_test.launch"
 
+.PHONY: image_adore-cli
+image_adore-cli: ## Returns the current docker image name for adore-cli
+	@echo "${ADORE_CLI_IMAGE_X11_DISPLAY}"
+
+.PHONY: images_adore-cli
+images_adore-cli: ## Returns all docker images for adore-cli
+	@echo "${ADORE_CLI_IMAGE}"
+	@echo "${ADORE_CLI_IMAGE_X11_DISPLAY}"
 
 endif

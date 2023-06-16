@@ -16,11 +16,15 @@ build: build_adore_if_ros
 	cd ${ADORE_CLI_SUBMODULES_PATH}/plotlabserver && make build_fast_plotlabserver
 	cd "${ADORE_CLI_MAKEFILE_PATH}" && \
     docker compose -f ${DOCKER_COMPOSE_FILE} build ${ADORE_CLI_PROJECT} \
+                         --build-arg ADORE_CLI_PROJECT=${ADORE_CLI_PROJECT} \
+                         --build-arg ADORE_CLI_PROJECT_X11_DISPLAY=${ADORE_CLI_PROJECT_X11_DISPLAY} \
                          --build-arg UID=${UID} \
                          --build-arg GID=${GID} \
                          --build-arg DOCKER_GID=${DOCKER_GID} \
                          --build-arg ADORE_IF_ROS_TAG=${ADORE_IF_ROS_TAG} && \
-    docker compose -f ${DOCKER_COMPOSE_FILE} build adore-cli_x11-display \
+    docker compose -f ${DOCKER_COMPOSE_FILE} build ${ADORE_CLI_PROJECT_X11_DISPLAY} \
+                         --build-arg ADORE_CLI_PROJECT=${ADORE_CLI_PROJECT} \
+                         --build-arg ADORE_CLI_PROJECT_X11_DISPLAY=${ADORE_CLI_PROJECT_X11_DISPLAY} \
                          --build-arg UID=${UID} \
                          --build-arg GID=${GID} \
                          --build-arg DOCKER_GID=${DOCKER_GID} \
