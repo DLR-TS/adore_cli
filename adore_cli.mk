@@ -129,7 +129,7 @@ adore-cli_setup:
 .PHONY: adore-cli_teardown
 adore-cli_teardown:
 	@echo "Running adore-cli teardown..."
-	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} down && xhost - 1> /dev/null || true
+	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} down || true
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} rm -f || true
 
 .PHONY: adore-cli_start
