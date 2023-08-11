@@ -136,12 +136,10 @@ adore-cli_teardown:
 adore-cli_start:
 	@echo "Running adore-cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 	cd ${ADORE_CLI_MAKEFILE_PATH} && \
-    xhost + && \
     docker compose -f ${DOCKER_COMPOSE_FILE} up adore-cli_x11-display \
       --force-recreate \
       --renew-anon-volumes \
-      --detach; \
-    xhost -
+      --detach;
 
 .PHONY: adore-cli_start_headless
 adore-cli_start_headless:
