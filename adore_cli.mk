@@ -152,7 +152,7 @@ adore-cli_attach:
 
 .PHONY: adore-cli_scenarios_run
 adore-cli_scenarios_run:
-	docker exec -it --user adore-cli adore-cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash ${ADORE_CLI_MAKEFILE_PATH}/tools/run_test_scenarios.sh" || true
+	docker exec --user adore-cli adore-cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash ${ADORE_CLI_MAKEFILE_PATH}/tools/run_test_scenarios.sh" || true
 
 .PHONY: run_test_scenarios
 run_test_scenarios: adore-cli_setup adore-cli_start_headless adore-cli_scenarios_run adore-cli_teardown ## Run adore test scenarios specified by the TEST_SCENARIOS environmental variable
