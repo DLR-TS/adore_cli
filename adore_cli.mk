@@ -148,7 +148,7 @@ adore-cli_start_headless:
 .PHONY: adore-cli_attach
 adore-cli_attach:
 	@echo "Running adore-cli attach..."
-	docker exec --user adore-cli adore-cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore-cli.sh" || true
+	docker exec -it --user adore-cli adore-cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore-cli.sh" || true
 
 .PHONY: adore-cli_scenarios_run
 adore-cli_scenarios_run:
