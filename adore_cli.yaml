@@ -35,7 +35,7 @@ services:
       - ${SOURCE_DIRECTORY}:/tmp/adore
       - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}     
 
-  adore_cli_x11-display:
+  adore_cli_x11_display:
     privileged: true
     image: ${ADORE_CLI_PROJECT_X11_DISPLAY}:${ADORE_CLI_TAG:-latest}
     container_name: ${ADORE_CLI_PROJECT}

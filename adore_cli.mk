@@ -23,7 +23,7 @@ endif
 
 ADORE_CLI_TAG:=$(shell cd "${MAKE_GADGETS_PATH}" && make get_sanitized_branch_name REPO_DIRECTORY="${ADORE_CLI_MAKEFILE_PATH}")
 ADORE_CLI_IMAGE:=${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG}
-ADORE_CLI_PROJECT_X11_DISPLAY:=${ADORE_CLI_PROJECT}_x11-display
+ADORE_CLI_PROJECT_X11_DISPLAY:=${ADORE_CLI_PROJECT}_x11_display
 ADORE_CLI_IMAGE_X11_DISPLAY:=${ADORE_CLI_PROJECT_X11_DISPLAY}:${ADORE_CLI_TAG}
 
 SOURCE_DIRECTORY?=${REPO_DIRECTORY}
@@ -136,7 +136,7 @@ adore_cli_teardown:
 adore_cli_start:
 	@echo "Running adore_cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 	cd ${ADORE_CLI_MAKEFILE_PATH} && \
-    docker compose -f ${DOCKER_COMPOSE_FILE} up adore_cli_x11-display \
+    docker compose -f ${DOCKER_COMPOSE_FILE} up adore_cli_x11_display \
       --force-recreate \
       --renew-anon-volumes \
       --detach;

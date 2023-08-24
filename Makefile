@@ -45,9 +45,9 @@ clean_submodules: clean_adore_if_ros
 .PHONY: clean
 clean: clean_submodules
 	docker rm $$(docker ps -a -q --filter "ancestor=${CATKIN_BASE_PROJECT}:${ADORE_CLI_TAG}") --force 2> /dev/null || true
-	docker rm $$(docker ps -a -q --filter "ancestor=${CATKIN_BASE_PROJECT}_x11-display:${ADORE_CLI_TAG}") --force 2> /dev/null || true
+	docker rm $$(docker ps -a -q --filter "ancestor=${CATKIN_BASE_PROJECT}_x11_display:${ADORE_CLI_TAG}") --force 2> /dev/null || true
 	docker rmi $$(docker images -q ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG}) --force 2> /dev/null || true
-	docker rmi $$(docker images -q ${ADORE_CLI_PROJECT}_x11-display:${ADORE_CLI_TAG}) --force 2> /dev/null || true
+	docker rmi $$(docker images -q ${ADORE_CLI_PROJECT}_x11_display:${ADORE_CLI_TAG}) --force 2> /dev/null || true
 	docker rmi $$(docker images --filter "dangling=true" -q) --force > /dev/null 2>&1 || true
 
 .PHONY: test
