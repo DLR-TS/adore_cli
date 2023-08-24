@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This script act as the main entrypoint for the adore-cli docker context.
+# This script act as the main entrypoint for the adore_cli docker context.
 
 set -euo pipefail
 
@@ -43,7 +43,7 @@ PLOTLABSERVER_DIRECTORY=${PLOTLABSERVER_DIRECTORY:-${SOURCE_DIRECTORY}/plotlabse
 clear
 
 cd "${ADORE_CLI_DIRECTORY}"
-bash tools/adore-cli_motd.sh
+bash tools/adore_cli_motd.sh
 
 cd "${ADORE_CLI_DIRECTORY}"
 bash tools/wait_for_plotlab_server.sh

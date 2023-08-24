@@ -29,11 +29,11 @@ printf "    To execute a scenario run the following commands: \n"
 printf "      roslaunch <scenario name> example: roslaunch baseline_test.launch\n\n"
 
 printf "    To attach another termanal session to the ADORe cli at any time on the host you can run: \n"
-printf "      'make adore-cli' or 'make cli' \n\n"
+printf "      'make adore_cli' or 'make cli' \n\n"
 
 printf "    To exit the adore cli type 'exit' \n\n"
 
-printf "    To stop the adore cli docker context type 'make stop_adore-cli' \n\n"
+printf "    To stop the adore cli docker context type 'make stop_adore_cli' \n\n"
 
 printf "    All make commands must be run from the adore source directory: %s\n\n" "${ADORE_SOURCE_DIRECTORY}"
 
