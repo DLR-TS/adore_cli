@@ -27,6 +27,6 @@ PROMPT='%B%F{grey}%F{cyan}ADORe CLI:%F %{$fg_bold[green]%}%c %{$reset_color%}$(g
 #RPROMPT=$(git_prompt_info)
 
 
-alias help='bash /tmp/adore_cli/tools/adore-cli_help.sh'
+alias help='bash /tmp/adore_cli/tools/adore_cli_help.sh'
 
 

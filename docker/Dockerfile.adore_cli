@@ -6,7 +6,7 @@ ARG GID
 
 ARG TEST_SCENARIOS
 
-FROM adore_if_ros:${ADORE_IF_ROS_TAG} AS adore-cli
+FROM adore_if_ros:${ADORE_IF_ROS_TAG} AS adore_cli
 
 ARG USER
 ARG UID
