@@ -27,12 +27,12 @@ services:
     #volumes:
     #    - .ros:/tmp/adore/.ros
 
-  adore-cli:
+  adore_cli:
     extends:
       file: ${ADORE_CLI_MAKEFILE_PATH}/adore_cli.yaml
-      service: adore-cli
+      service: adore_cli
 
-  adore-cli_x11-display:
+  adore_cli_x11-display:
     extends:
       file: ${ADORE_CLI_MAKEFILE_PATH}/adore_cli.yaml
-      service: adore-cli_x11-display
+      service: adore_cli_x11-display

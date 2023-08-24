@@ -5,7 +5,7 @@ ifeq ($(filter adore_cli.mk, $(notdir $(MAKEFILE_LIST))), adore_cli.mk)
 
 .EXPORT_ALL_VARIABLES:
 SHELL:=/bin/bash
-ADORE_CLI_PROJECT:=adore-cli
+ADORE_CLI_PROJECT:=adore_cli
 
 ADORE_CLI_MAKEFILE_PATH:=$(shell realpath "$(shell dirname "$(lastword $(MAKEFILE_LIST))")")
 ifeq ($(SUBMODULES_PATH),)
@@ -64,43 +64,43 @@ adore_if_ros_check:
         exit 1; \
     fi
 
-.PHONY: adore-cli_up
-adore-cli_up: adore-cli_setup adore-cli_start adore-cli_attach adore-cli_teardown 
+.PHONY: adore_cli_up
+adore_cli_up: adore_cli_setup adore_cli_start adore_cli_attach adore_cli_teardown 
 
-.PHONY: adore-cli_up_
-adore-cli_up_: adore-cli_setup adore-cli_start 
+.PHONY: adore_cli_up_
+adore_cli_up_: adore_cli_setup adore_cli_start 
 
 .PHONY: cli
-cli: adore-cli ## Same as 'make adore-cli' for the lazy 
+cli: adore_cli ## Same as 'make adore_cli' for the lazy 
 
-.PHONY: stop_adore-cli
-stop_adore-cli: docker_host_context_check adore-cli_teardown ## Stop adore-cli docker context if it is running
+.PHONY: stop_adore_cli
+stop_adore_cli: docker_host_context_check adore_cli_teardown ## Stop adore_cli docker context if it is running
 
-.PHONY: adore-cli 
-adore-cli: docker_host_context_check start_apt_cacher_ng build_fast_adore_if_ros build_fast_adore-cli ## Start adore-cli context or attach to it if already running
+.PHONY: adore_cli 
+adore_cli: docker_host_context_check start_apt_cacher_ng build_fast_adore_if_ros build_fast_adore_cli ## Start adore_cli context or attach to it if already running
 	@if [[ "$$(docker inspect -f '{{.State.Running}}' '${ADORE_CLI_PROJECT}' 2>/dev/null)" == "true"  ]]; then\
-        cd "${ADORE_CLI_MAKEFILE_PATH}" && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore-cli_attach;\
+        cd "${ADORE_CLI_MAKEFILE_PATH}" && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore_cli_attach;\
         exit 0;\
     else\
-        cd "${ADORE_CLI_MAKEFILE_PATH}" && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore-cli_up;\
+        cd "${ADORE_CLI_MAKEFILE_PATH}" && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore_cli_up;\
         exit 0;\
     fi;
 
-.PHONY: build_fast_adore-cli
-build_fast_adore-cli: # build the adore-cli conte does not already exist in the docker repository. If it does exist this is a noop.
+.PHONY: build_fast_adore_cli
+build_fast_adore_cli: # build the adore_cli conte does not already exist in the docker repository. If it does exist this is a noop.
 	@if [ -n "$$(docker images -q ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG})" ]; then \
         echo "Docker image: ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG} already build, skipping build."; \
     else \
-        cd "${ADORE_CLI_MAKEFILE_PATH}" && make build_adore-cli;\
+        cd "${ADORE_CLI_MAKEFILE_PATH}" && make build_adore_cli;\
     fi
 
 
-.PHONY: build_adore-cli
-build_adore-cli: clean_adore-cli ## Builds the ADORe CLI docker context/image
+.PHONY: build_adore_cli
+build_adore_cli: clean_adore_cli ## Builds the ADORe CLI docker context/image
 	cd "${ADORE_CLI_MAKEFILE_PATH}" && make build 
 
-.PHONY: clean_adore-cli 
-clean_adore-cli: ## Clean adore-cli docker context 
+.PHONY: clean_adore_cli 
+clean_adore_cli: ## Clean adore_cli docker context 
 	cd "${ADORE_CLI_MAKEFILE_PATH}" && make clean
 
 .PHONY: run_test_scenarios_headless
@@ -110,12 +110,12 @@ run_test_scenarios_headless:# run headless test scenarios
 
 
 .PHONY: run_test_scenarios
-run_test_scenarios: adore-cli_setup adore-cli_start_headless adore-cli_scenarios_run adore-cli_teardown # run test scenarios
+run_test_scenarios: adore_cli_setup adore_cli_start_headless adore_cli_scenarios_run adore_cli_teardown # run test scenarios
 
-.PHONY: adore-cli_setup
-adore-cli_setup: 
-	@echo "Running adore-cli setup... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
-	make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk build_fast_adore-cli
+.PHONY: adore_cli_setup
+adore_cli_setup: 
+	@echo "Running adore_cli setup... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
+	make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk build_fast_adore_cli
 	cd ${ADORE_CLI_SUBMODULES_PATH}/catkin_docker && make initialize_catkin_workspace
 	@mkdir -p ${ADORE_CLI_SUBMODULES_PATH}/.log/.ros/bag_files
 	@mkdir -p ${ADORE_CLI_SUBMODULES_PATH}/plotlabserver/.log
@@ -126,36 +126,36 @@ adore-cli_setup:
 	cd ${ADORE_CLI_SUBMODULES_PATH}/plotlabserver && \
     make down || true
 
-.PHONY: adore-cli_teardown
-adore-cli_teardown:
-	@echo "Running adore-cli teardown..."
+.PHONY: adore_cli_teardown
+adore_cli_teardown:
+	@echo "Running adore_cli teardown..."
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} down || true
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} rm -f || true
 
-.PHONY: adore-cli_start
-adore-cli_start:
-	@echo "Running adore-cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
+.PHONY: adore_cli_start
+adore_cli_start:
+	@echo "Running adore_cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 	cd ${ADORE_CLI_MAKEFILE_PATH} && \
-    docker compose -f ${DOCKER_COMPOSE_FILE} up adore-cli_x11-display \
+    docker compose -f ${DOCKER_COMPOSE_FILE} up adore_cli_x11-display \
       --force-recreate \
       --renew-anon-volumes \
       --detach;
 
-.PHONY: adore-cli_start_headless
-adore-cli_start_headless:
-	export DISPLAY_MODE=headless && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore-cli_start 
+.PHONY: adore_cli_start_headless
+adore_cli_start_headless:
+	export DISPLAY_MODE=headless && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore_cli_start 
 
-.PHONY: adore-cli_attach
-adore-cli_attach:
-	@echo "Running adore-cli attach..."
-	docker exec -it --user adore-cli adore-cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore-cli.sh" || true
+.PHONY: adore_cli_attach
+adore_cli_attach:
+	@echo "Running adore_cli attach..."
+	docker exec -it --user adore_cli adore_cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore_cli.sh" || true
 
-.PHONY: adore-cli_scenarios_run
-adore-cli_scenarios_run:
-	docker exec --user adore-cli adore-cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash ${ADORE_CLI_MAKEFILE_PATH}/tools/run_test_scenarios.sh" || true
+.PHONY: adore_cli_scenarios_run
+adore_cli_scenarios_run:
+	docker exec --user adore_cli adore_cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash ${ADORE_CLI_MAKEFILE_PATH}/tools/run_test_scenarios.sh" || true
 
 .PHONY: run_test_scenarios
-run_test_scenarios: adore-cli_setup adore-cli_start_headless adore-cli_scenarios_run adore-cli_teardown ## Run adore test scenarios specified by the TEST_SCENARIOS environmental variable
+run_test_scenarios: adore_cli_setup adore_cli_start_headless adore_cli_scenarios_run adore_cli_teardown ## Run adore test scenarios specified by the TEST_SCENARIOS environmental variable
 	@echo "  To run alternative scenarios call 'make run_test_scenarios' by modifying the environmental variable TEST_SCENARIOS."
 	@echo "    Usage examples: "
 	@echo "      make run_test_scenarios TEST_SCENARIOS=baseline_test.launch"
@@ -164,12 +164,16 @@ run_test_scenarios: adore-cli_setup adore-cli_start_headless adore-cli_scenarios
 	@echo "      make run_test_scenarios DISPLAY_MODE=native TEST_SCENARIOS=baseline_test.launch"
 	@echo "      make run_test_scenarios DISPLAY_MODE=window_manager TEST_SCENARIOS=baseline_test.launch"
 
-.PHONY: image_adore-cli
-image_adore-cli: ## Returns the current docker image name for adore-cli
+.PHONY: branch_adore_if_ros
+branch_adore_cli: ## Returns the current docker safe/sanitized branch for adore_cli 
+	@printf "%s\n" ${ADORE_CLI_TAG}
+
+.PHONY: image_adore_cli
+image_adore_cli: ## Returns the current docker image name for adore_cli
 	@echo "${ADORE_CLI_IMAGE_X11_DISPLAY}"
 
-.PHONY: images_adore-cli
-images_adore-cli: ## Returns all docker images for adore-cli
+.PHONY: images_adore_cli
+images_adore_cli: ## Returns all docker images for adore_cli
 	@echo "${ADORE_CLI_IMAGE}"
 	@echo "${ADORE_CLI_IMAGE_X11_DISPLAY}"
 
