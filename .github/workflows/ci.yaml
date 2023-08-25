@@ -49,6 +49,7 @@ jobs:
       - name: Build
         run: |
           df -h
+          source apt_cacher_ng_docker/disable_apt_cacher_ng.env
           make build
       - name: CI Test
         run: |
