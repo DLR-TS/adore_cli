@@ -77,7 +77,7 @@ cli: adore_cli ## Same as 'make adore_cli' for the lazy
 stop_adore_cli: docker_host_context_check adore_cli_teardown ## Stop adore_cli docker context if it is running
 
 .PHONY: adore_cli 
-adore_cli: docker_host_context_check start_apt_cacher_ng build_fast_adore_if_ros build_fast_adore_cli ## Start adore_cli context or attach to it if already running
+adore_cli: docker_host_context_check start_apt_cacher_ng build_fast_adore_if_ros build_fast_plotlabserver build_fast_adore_cli ## Start adore_cli context or attach to it if already running
 	@if [[ "$$(docker inspect -f '{{.State.Running}}' '${ADORE_CLI_PROJECT}' 2>/dev/null)" == "true"  ]]; then\
         cd "${ADORE_CLI_MAKEFILE_PATH}" && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore_cli_attach;\
         exit 0;\
