@@ -58,7 +58,7 @@ export CATKIN_SHELL=sh
 
 if ! [[ -f ${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh ]]; then
     echoerr "ERROR: The catkin workspace environmental script not found: ${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh"
-    echoerr "  run 'make create_catkin_worksapce' to generate a catkin workspace and try again."
+    echoerr "  run 'make create_catkin_workspace' to generate a catkin workspace and try again."
     echo ""
     exit 1
 fi
