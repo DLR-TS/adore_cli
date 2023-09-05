@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function echoerr { echo "$@" >&2; exit 1;}
-set -x
+
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]:-$0}"; )" &> /dev/null && pwd 2> /dev/null; )";
 
