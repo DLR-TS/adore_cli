@@ -29,7 +29,7 @@ RUN useradd --create-home ${USER}
 
 
 RUN usermod -u ${UID} ${USER} && groupmod -g ${GID} ${USER}
-RUN chown -r ${UID}:${GID} $$HOME | true
+RUN chown -R ${UID}:${GID} $$HOME | true
 
 ARG ZSH_CUSTOM=/home/${USER}/.oh-my-zsh/custom
 

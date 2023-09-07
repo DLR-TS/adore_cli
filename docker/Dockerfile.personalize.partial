@@ -5,4 +5,4 @@ ARG UID
 ARG GID
 
 RUN usermod -u ${UID} ${USER} && groupmod -g ${GID} ${USER}
-RUN chown -r ${UID}:${GID} $$HOME | true
+RUN chown -R ${UID}:${GID} $$HOME | true
