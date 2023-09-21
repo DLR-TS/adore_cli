@@ -1,5 +1,6 @@
 rviz
 ros-noetic-rviz
+less
 
 # debugging dependencies
 #mesa-utils #for glxgears
