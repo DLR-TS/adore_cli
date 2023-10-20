@@ -33,15 +33,17 @@ RUN chown -R ${UID}:${GID} $$HOME | true
 
 ARG ZSH_CUSTOM=/home/${USER}/.oh-my-zsh/custom
 
+RUN chown ${USER}:${USER} /home/${USER} -R 
 
 USER root
 RUN apt-get update && \
     apt-get install --no-install-recommends -y zsh git curl && \
     rm -rf /var/lib/apt/lists/*
 
+
 USER ${USER}
 WORKDIR /home/${USER}
-RUN zsh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN zsh -c "$(curl -fsSL sh  https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
 

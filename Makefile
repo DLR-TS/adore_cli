@@ -8,6 +8,8 @@ SOURCE_DIRECTORY:=${ROOT_DIR}
 ADORE_CLI_WORKING_DIRECTORY:=${ROOT_DIR}
 CATKIN_WORKSPACE_DIRECTORY:=${SOURCE_DIRECTORY}/catkin_workspace
 
+DOCKER_CONFIG=
+
 include adore_cli.mk
 include ${ADORE_CLI_SUBMODULES_PATH}/ci_teststand/ci_teststand.mk
 
