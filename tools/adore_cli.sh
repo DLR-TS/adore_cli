@@ -63,7 +63,6 @@ if ! [[ -f ${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh ]]; then
     exit 1
 fi
 source "${CATKIN_WORKSPACE_DIRECTORY}/install/setup.sh" || true
-source "${SOURCE_DIRECTORY}/v2x_if_ros_msg/v2x_if_ros_msg/build/devel/local_setup.zsh" 2> /dev/null || true
 
 cd "${ADORE_CLI_WORKING_DIRECTORY}"
 
