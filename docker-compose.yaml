@@ -1,12 +1,12 @@
 version: '3.3'
 
 services:
-  adore_cli:
+  adore_cli_core:
     extends:
       file: ${ADORE_CLI_MAKEFILE_PATH}/adore_cli.yaml
-      service: adore_cli
+      service: adore_cli_core
 
-  adore_cli_x11_display:
+  adore_cli_core_x11_display:
     extends:
       file: ${ADORE_CLI_MAKEFILE_PATH}/adore_cli.yaml
-      service: adore_cli_x11_display
+      service: adore_cli_core_x11_display

@@ -6,6 +6,7 @@ ROOT_DIR:=$(shell dirname "$(realpath $(firstword $(MAKEFILE_LIST)))")
 #SOURCE_DIRECTORY:=$(shell realpath "${ROOT_DIR}/..")
 SOURCE_DIRECTORY:=${ROOT_DIR}
 ADORE_CLI_WORKING_DIRECTORY:=${ROOT_DIR}
+CATKIN_WORKSPACE_DIRECTORY:=${SOURCE_DIRECTORY}/catkin_workspace
 
 include adore_cli.mk
 include ${ADORE_CLI_SUBMODULES_PATH}/ci_teststand/ci_teststand.mk
@@ -27,8 +28,7 @@ build:
                          --build-arg USER=${USER} \
                          --build-arg UID=${UID} \
                          --build-arg GID=${GID} \
-                         --build-arg DOCKER_GID=${DOCKER_GID} \
-                         --build-arg ADORE_IF_ROS_TAG=${ADORE_IF_ROS_TAG} && \
+                         --build-arg DOCKER_GID=${DOCKER_GID} && \
     docker compose -f ${DOCKER_COMPOSE_FILE} build ${ADORE_CLI_PROJECT_X11_DISPLAY} \
                          --build-arg ADORE_CLI_PROJECT=${ADORE_CLI_PROJECT} \
                          --build-arg ADORE_CLI_PROJECT_X11_DISPLAY=${ADORE_CLI_PROJECT_X11_DISPLAY} \
