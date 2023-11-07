@@ -109,7 +109,7 @@ adore_cli_teardown:
 adore_cli_start:
 	@echo "Running adore_cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 	cd ${ADORE_CLI_MAKEFILE_PATH} && \
-    docker compose -f ${DOCKER_COMPOSE_FILE} up adore_cli_x11_display \
+    docker compose -f ${DOCKER_COMPOSE_FILE} up ${ADORE_CLI_PROJECT_X11_DISPLAY} \
       --force-recreate \
       --renew-anon-volumes \
       --detach;
@@ -121,7 +121,7 @@ adore_cli_start_headless:
 .PHONY: adore_cli_attach
 adore_cli_attach:
 	@echo "Running adore_cli attach..."
-	docker exec -it --user ${USER} adore_cli /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore_cli.sh" || true
+	docker exec -it --user ${USER} ${ADORE_CLI_PROJECT} /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore_cli.sh" || true
 
 .PHONY: branch_adore_cli
 branch_adore_cli: ## Returns the current docker safe/sanitized branch for adore_cli 
