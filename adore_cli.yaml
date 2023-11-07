@@ -5,27 +5,23 @@ services:
     privileged: true
     image: ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG:-latest}
     container_name: ${ADORE_CLI_PROJECT}
-    user: adore_cli
+    user: ${USER}
     hostname: ADORe-CLI
     network_mode: "host"
     environment:
-      - CATKIN_WORKSPACE_DIRECTORY=${CATKIN_WORKSPACE_DIRECTORY}
       - TEST_SCENARIOS=${TEST_SCENARIOS:-baseline_test.launch}
       - "BAG_OUTPUT_DIRECTORY=${SOURCE_DIRECTORY}/.log/.ros/bag_files"
       - "ROS_HOME=${SOURCE_DIRECTORY}/.log/.ros"
       - "HISTFILE=${SOURCE_DIRECTORY}/.zsh_history"
-      - "ROS_MASTER_URI=http://127.0.0.1:11311"
-      - "ROS_HOSTNAME=127.0.0.1"
     depends_on:
       #- ros-master  #activate this option if you want to start roscore on startup of adore_cli container
-      - plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
     build:
       context: ${ADORE_CLI_MAKEFILE_PATH}
       network: host
       dockerfile: ${ADORE_CLI_MAKEFILE_PATH}/docker/Dockerfile.adore_cli
       args:
         - ADORE_CLI_TAG=${ADORE_CLI_TAG:-latest}
-        - USER=adore_cli
+        - USER=${USER}
         - UID=${UID:-1000}
         - GID=${GID:-1001}
     volumes:
@@ -39,18 +35,18 @@ services:
     privileged: true
     image: ${ADORE_CLI_PROJECT_X11_DISPLAY}:${ADORE_CLI_TAG:-latest}
     container_name: ${ADORE_CLI_PROJECT}
-    user: adore_cli
+    user: ${USER} 
     hostname: ADORe-CLI
     network_mode: "host"
     environment:
       - ADORE_SOURCE_DIRECTORY=${SOURCE_DIRECTORY}
       - SOURCE_DIRECTORY=${SOURCE_DIRECTORY}
       - ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY}
-      - CATKIN_WORKSPACE_DIRECTORY=${CATKIN_WORKSPACE_DIRECTORY}
       - DISPLAY_MODE=${DISPLAY_MODE:-native}
       # - DISPLAY_MODE=${DISPLAY_MODE:-window_manager}
       # - DISPLAY_MODE=${DISPLAY_MODE:-headless}
       - DISPLAY=${DISPLAY}
+      - USER=${USER}
       - UID=${UID}
       - GID=${GID}
       - TEST_SCENARIOS=${TEST_SCENARIOS:-baseline_test.launch}
@@ -61,7 +57,6 @@ services:
       - "ROS_HOSTNAME=127.0.0.1"
     depends_on:
       # - ros-master  #activate this option if you want to start roscore on startup of adore_cli container
-      - plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
     build:
       context: ${ADORE_CLI_MAKEFILE_PATH}
       network: host
@@ -69,7 +64,7 @@ services:
       args:
         - ADORE_CLI_TAG=${ADORE_CLI_TAG:-latest}
         - ADORE_IF_ROS_TAG=${ADORE_IF_ROS_TAG:-latest}
-        - USER=adore_cli
+        - USER=${USER}
         - UID=${UID:-1000}
         - GID=${GID:-1001}
     volumes:

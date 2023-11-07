@@ -1,18 +1,14 @@
-ARG USER=adore-cli
-ARG ADORE_IF_ROS_TAG=latest
-ARG USER
-ARG UID
-ARG GID
-
-ARG TEST_SCENARIOS
-
-FROM adore_if_ros:${ADORE_IF_ROS_TAG} AS adore_cli
 
 ARG USER
 ARG UID
 ARG GID
 
-ARG TEST_SCENARIOS
+FROM ros:iron-ros-core-jammy AS adore_cli
+
+ARG USER
+ARG UID
+ARG GID
+
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \

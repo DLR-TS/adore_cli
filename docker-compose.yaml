@@ -1,32 +1,6 @@
 version: '3.3'
 
 services:
- 
-  plotlabserver:
-    extends:
-      file: ${ADORE_CLI_SUBMODULES_PATH}/plotlabserver/plotlabserver.yaml
-      service: plotlabserver
-    environment:
-      # Change the display mode for plotlabserver by uncommenting the desired mode.
-      #   For more information regarding display modes please refer to the plotlabserver
-      #   documentation.
-      - DISPLAY_MODE=${DISPLAY_MODE:-native}
-      # - DISPLAY_MODE=${DISPLAY_MODE:-window_manager}
-      # - DISPLAY_MODE=${DISPLAY_MODE:-headless}
-  
-  ros-master:
-    image: ros:noetic-ros-core
-    container_name: ros-master
-    command: stdbuf -o L roscore
-    restart: always
-    user: nobody
-    environment:
-      - "ROS_HOME=${SOURCE_DIRECTORY}/.log/.ros"
-      - "ROS_MASTER_URI=http://127.0.0.1:11311"
-      - "ROS_HOSTNAME=127.0.0.1"
-    #volumes:
-    #    - .ros:/tmp/adore/.ros
-
   adore_cli:
     extends:
       file: ${ADORE_CLI_MAKEFILE_PATH}/adore_cli.yaml

@@ -1,9 +1,11 @@
 ARG ADORE_CLI_TAG=latest
+
 ARG REQUIREMENTS_FILE
 ARG USER
 
 FROM adore_cli:${ADORE_CLI_TAG} as adore_cli
 
+ARG USER
 ARG REQUIREMENTS_FILE="requirements.adore_cli_x11_display.ubuntu20.04.system"
 
 USER root
