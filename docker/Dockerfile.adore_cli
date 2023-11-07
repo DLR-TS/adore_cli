@@ -20,6 +20,17 @@ RUN apt-get update && \
                                                && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y python3-rospy && \
+                                               python3-colcon-common-extensions \
+                                                cmake \
+                                                ros-dev-tools \
+                                                vim \
+                                                ros-iron-ros-base \
+                                                python3-pip \
+                                                setuptools==58.2.0
+
+
 
 RUN useradd --create-home ${USER}
 
