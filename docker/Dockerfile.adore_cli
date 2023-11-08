@@ -3,34 +3,31 @@ ARG USER
 ARG UID
 ARG GID
 
-FROM ros:iron-ros-core-jammy AS adore_cli
+#FROM ros:iron-ros-core-jammy AS adore_cli
+
+FROM ros:iron-ros-core-base AS adore_cli
 
 ARG USER
 ARG UID
 ARG GID
 
+#RUN apt-get update && cat /etc/os-release && apt-cache search setuptools && exit 1
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
-                                               xterm \
-                                               netcat \
-                                               net-tools \
-                                               apt-file \
-                                               python-is-python3 \
-                                               && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y python3-rospy && \
-                                               python3-colcon-common-extensions \
+                                                sudo \
+                                                apt-file \
+                                                python3-rospy \
+                                                python3-colcon-common-extensions \
                                                 cmake \
                                                 ros-dev-tools \
                                                 vim \
                                                 ros-iron-ros-base \
                                                 python3-pip \
-                                                setuptools==58.2.0
+                                               && \
+    rm -rf /var/lib/apt/lists/*
 
-
+RUN python3 -m pip install setuptools==58.2.0 
 
 RUN useradd --create-home ${USER}
 
@@ -56,7 +53,7 @@ USER root
 COPY docker/files/.zshrc /home/${USER}
 RUN chown -R ${UID}:${GID} /home/${USER}
 
-RUN echo "${USER} ALL = NOPASSWD : /usr/bin/apt-get, /usr/bin/apt, /usr/bin/apt-file, /usr/bin/apt-cache, /usr/bin/aptitude" >> /etc/sudoers
+RUN echo "${USER} ALL = NOPASSWD : /usr/bin/apt-get, /usr/bin/apt, /usr/bin/python3, /usr/bin/apt-file, /usr/bin/apt-cache, /usr/bin/aptitude" >> /etc/sudoers
 
 
 RUN mkdir -p /tmp/adore

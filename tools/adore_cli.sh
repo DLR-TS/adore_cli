@@ -39,6 +39,8 @@ printf "\n"
 #echo " ADORE_CLI_WORKING_DIRECTORY: ${ADORE_CLI_WORKING_DIRECTORY}"
 #echo " CATKIN_WORKSPACE_DIRECTORY: ${CATKIN_WORKSPACE_DIRECTORY}"
 
+source /opt/ros/iron/setup.zsh
+
 cd "${ADORE_CLI_WORKING_DIRECTORY}"
 
 if [ -z ${VEHICLE_NAME+x} ]; then 
