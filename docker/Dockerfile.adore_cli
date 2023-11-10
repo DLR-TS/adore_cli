@@ -5,7 +5,7 @@ ARG GID
 
 #FROM ros:iron-ros-core-jammy AS adore_cli
 
-FROM ros:iron-ros-core-base AS adore_cli
+FROM ros:iron-ros-core-jammy AS adore_cli
 
 ARG USER
 ARG UID
