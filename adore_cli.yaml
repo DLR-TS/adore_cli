@@ -6,7 +6,6 @@ services:
     image: ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG:-latest}
     container_name: ${ADORE_CLI_PROJECT}
     user: ${USER}
-    hostname: ADORe-CLI
     network_mode: "host"
     environment:
       - TEST_SCENARIOS=${TEST_SCENARIOS:-baseline_test.launch}
@@ -36,7 +35,6 @@ services:
     image: ${ADORE_CLI_PROJECT_X11_DISPLAY}:${ADORE_CLI_TAG:-latest}
     container_name: ${ADORE_CLI_PROJECT}
     user: ${USER} 
-    hostname: ADORe-CLI
     network_mode: "host"
     environment:
       - ADORE_SOURCE_DIRECTORY=${SOURCE_DIRECTORY}

@@ -78,12 +78,12 @@ build_fast_adore_cli_core: # build the adore_cli core context if it does not alr
 	@if [ -n "$$(docker images -q ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG})" ]; then \
         echo "Docker image: ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG} already build, skipping build."; \
     else \
-        cd "${ADORE_CLI_MAKEFILE_PATH}" && make _build_adore_cli_core;\
+        cd "${ADORE_CLI_MAKEFILE_PATH}" && make build_adore_cli_core;\
     fi
 
 
-.PHONY: _build_adore_cli_core
-_build_adore_cli_core: clean_adore_cli ## Builds the ADORe CLI core docker context/image
+.PHONY: build_adore_cli_core
+build_adore_cli_core: clean_adore_cli ## Builds the ADORe CLI core docker context/image
 	cd "${ADORE_CLI_MAKEFILE_PATH}" && make start_apt_cacher_ng 
 	cd "${ADORE_CLI_MAKEFILE_PATH}" && make build 
 

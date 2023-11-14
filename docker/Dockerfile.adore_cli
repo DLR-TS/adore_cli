@@ -2,6 +2,7 @@
 ARG USER
 ARG UID
 ARG GID
+ARG HOSTNAME=ADORe-CLI
 
 #FROM ros:iron-ros-core-jammy AS adore_cli
 
@@ -10,8 +11,8 @@ FROM ros:iron-ros-core-jammy AS adore_cli
 ARG USER
 ARG UID
 ARG GID
-
-#RUN apt-get update && cat /etc/os-release && apt-cache search setuptools && exit 1
+ARG HOSTNAME
+ENV HOSTNAME=${HOSTNAME}
 
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
@@ -25,13 +26,14 @@ RUN apt-get update && \
                                                 ros-iron-ros-base \
                                                 python3-pip \
                                                 ros-iron-foxglove-bridge \ 
-						&& \
+    && \
     rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install setuptools==58.2.0 
 
 RUN useradd --create-home ${USER}
 
+RUN echo "127.0.1.1   ${HOSTNAME}" >> /etc/hosts 
 
 RUN usermod -u ${UID} ${USER} && groupmod -g ${GID} ${USER}
 RUN chown -R ${UID}:${GID} $$HOME | true
