@@ -7,7 +7,7 @@ set -euo pipefail
 SCRIPT_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 echoerr (){ printf "%s" "$@" >&2;}
 exiterr (){ echoerr "$@"; exit 1;}
-
+SCRIPT_DIRECTORY="/tmp/adore/tools/adore_cli/tools"
 
 #SOURCE_DIRECTORY=${SOURCE_DIRECTORY:-/tmp/adore}
 ADORE_CLI_DIRECTORY=${ADORE_CLI_DIRECTORY:-/tmp/adore_cli}
@@ -35,6 +35,7 @@ bash tools/adore_cli_motd.sh
 
 printf "\n"
 
+bash "${SCRIPT_DIRECTORY}/git_repo_status.sh"
 #echo " SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 #echo " ADORE_CLI_WORKING_DIRECTORY: ${ADORE_CLI_WORKING_DIRECTORY}"
 #echo " CATKIN_WORKSPACE_DIRECTORY: ${CATKIN_WORKSPACE_DIRECTORY}"
@@ -42,6 +43,7 @@ printf "\n"
 
 cd "${ADORE_CLI_WORKING_DIRECTORY}"
 
+echo "  Vehicle: "
 if [ -z ${VEHICLE_NAME+x} ]; then 
     printf "  No vehicle set.\n\n"; 
 else 
@@ -49,4 +51,4 @@ else
 fi
 zsh
 
-source /opt/ros/iron/setup.zsh
+##source /opt/ros/iron/setup.zsh
