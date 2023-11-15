@@ -77,6 +77,7 @@ services:
       - .bash_history:/home/adore_cli/.bash_history
       - ./:/tmp/adore_cli
       - ${SOURCE_DIRECTORY}:/tmp/adore
-      - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}     
+      - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}
+      - ./.ccache:/home/${USER}/.cache
     extra_hosts:
       - "${HOSTNAME:-ADORe-CLI}:127.0.0.1"
