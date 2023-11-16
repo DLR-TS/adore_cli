@@ -17,7 +17,7 @@ cd ${SCRIPT_DIRECTORY}
 if [ ! -z "$(git status --porcelain)" ]; then
     printf "  ${BOLD}${BLINK}${ORANGE}WARNING:${RESET} The ${BOLD}adore_cli${RESET} repo has changes. \n  Rebuild the adore_cli with 'make build_adore_cli' for new changes to take effect.\n"
     printf "  Commit or discard changes to the adore_cli repo to clear this message.\n\n"
-    git status
+    #git status
     echo ""
 fi
 )

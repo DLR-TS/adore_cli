@@ -30,18 +30,19 @@ fi
 
 clear
 
-cd "${ADORE_CLI_DIRECTORY}"
-bash tools/adore_cli_motd.sh
+
+bash "${SCRIPT_DIRECTORY}/git_repo_status.sh"
+cd "${ADORE_CLI_WORKING_DIRECTORY}"
+bash "${SCRIPT_DIRECTORY}/requirements_file_change_status.sh"
+bash "${SCRIPT_DIRECTORY}/adore_cli_motd.sh"
 
 printf "\n"
 
-bash "${SCRIPT_DIRECTORY}/git_repo_status.sh"
 #echo " SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 #echo " ADORE_CLI_WORKING_DIRECTORY: ${ADORE_CLI_WORKING_DIRECTORY}"
 #echo " CATKIN_WORKSPACE_DIRECTORY: ${CATKIN_WORKSPACE_DIRECTORY}"
 
 
-cd "${ADORE_CLI_WORKING_DIRECTORY}"
 
 echo "  Vehicle: "
 if [ -z ${VEHICLE_NAME+x} ]; then 
