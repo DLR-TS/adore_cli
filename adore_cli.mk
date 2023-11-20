@@ -63,6 +63,9 @@ cli: adore_cli ## Same as 'make adore_cli' for the lazy
 .PHONY: stop_adore_cli
 stop_adore_cli: docker_host_context_check adore_cli_teardown ## Stop adore_cli docker context if it is running
 
+.PHONY: stop_adore_cli_setup
+stop_adore_cli_setup: docker_host_context_check adore_cli_teardown_setup
+
 .PHONY: adore_cli 
 adore_cli: docker_host_context_check build_fast_adore_cli_core ## Start adore_cli context or attach to it if already running
 	@if [[ "$$(docker inspect -f '{{.State.Running}}' '${ADORE_CLI_PROJECT}' 2>/dev/null)" == "true"  ]]; then\
@@ -105,6 +108,11 @@ adore_cli_teardown:
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} down || true
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} rm -f || true
 
+.PHONY: adore_cli_teardown_setup
+adore_cli_teardown_setup:
+	@echo "Running adore_cli setup teardown..."
+	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} stop || true
+
 .PHONY: adore_cli_start
 adore_cli_start:
 	@echo "Running adore_cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
@@ -113,6 +121,8 @@ adore_cli_start:
       --force-recreate \
       --renew-anon-volumes \
       --detach;
+
+
 
 .PHONY: adore_cli_start_headless
 adore_cli_start_headless:
