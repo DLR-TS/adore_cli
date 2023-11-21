@@ -29,9 +29,12 @@ services:
     volumes:
       - ./:/tmp/adore
       - /var/run/docker.sock:/var/run/docker.sock
-      - .bash_history:/home/adore_cli/.bash_history
+      - .bash_history:/home/${USER}/.bash_history
+      - .bash_history:/home/${USER}/.zsh_history
+      - .bash_history:/home/${USER}/.zsh_history.new
       - ${SOURCE_DIRECTORY}:/tmp/adore
       - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}     
+      - ${ADORE_CLI_MAKEFILE_PATH}/.ccache:/home/${USER}/.ccache
 
   adore_cli_core_x11_display:
     privileged: true
@@ -74,10 +77,12 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/docker.sock:/var/run/docker.sock
-      - .bash_history:/home/adore_cli/.bash_history
+      - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.bash_history
+      - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.zsh_history
+      - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.zsh_history.new
       - ./:/tmp/adore_cli
       - ${SOURCE_DIRECTORY}:/tmp/adore
       - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}
-      - ./.ccache:/home/${USER}/.cache
+      - ${ADORE_CLI_MAKEFILE_PATH}/.ccache:/home/${USER}/.ccacheeee
     extra_hosts:
       - "${HOSTNAME:-ADORe-CLI}:127.0.0.1"

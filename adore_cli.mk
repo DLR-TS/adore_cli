@@ -98,9 +98,11 @@ clean_adore_cli: ## Clean adore_cli docker context
 adore_cli_setup: 
 	@echo "Running adore_cli setup... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 	make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk build_fast_adore_cli_core
-	@mkdir -p ${ADORE_CLI_SUBMODULES_PATH}/.log
-	@touch .zsh_history
-	@touch .zsh_history.new
+	@mkdir -p ${ADORE_CLI_MAKEFILE_PATH}/.log
+	@mkdir -p ${ADORE_CLI_MAKEFILE_PATH}/.ccache
+	@touch ${ADORE_CLI_MAKEFILE_PATH}/.bash_history
+	@touch ${ADORE_CLI_MAKEFILE_PATH}/.zsh_history
+	@touch ${ADORE_CLI_MAKEFILE_PATH}/.zsh_history.new
 
 .PHONY: adore_cli_teardown
 adore_cli_teardown:
@@ -131,7 +133,7 @@ adore_cli_start_headless:
 .PHONY: adore_cli_attach
 adore_cli_attach:
 	@echo "Running adore_cli attach..."
-	docker exec -it --user ${USER} ${ADORE_CLI_PROJECT} /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore_cli.sh" || true
+	docker exec -it ${ADORE_CLI_PROJECT} /bin/zsh -c "ADORE_CLI_WORKING_DIRECTORY=${ADORE_CLI_WORKING_DIRECTORY} bash /tmp/adore_cli/tools/adore_cli.sh" || true
 
 .PHONY: branch_adore_cli
 branch_adore_cli: ## Returns the current docker safe/sanitized branch for adore_cli 

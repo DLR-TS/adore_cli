@@ -1,5 +1,7 @@
 .log/
 .zsh_history*
-.bash_history*
+.bash_history
 catkin_workspace/
 .config
+adore_cli
+.ccache
