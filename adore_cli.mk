@@ -51,6 +51,8 @@ ADORE_CLI_SUBMODULES:=make_gadgets apt_cacher_ng_docker
 #include ${MAKE_GADGETS_PATH}/submodule_utils.mk
 #$(call include_submodules,${ADORE_CLI_SUBMODULES_PATH}, ${ADORE_CLI_SUBMODULES})
 
+$(shell mkdir -p "${ADORE_CLI_MAKEFILE_PATH}/.ccache")
+
 .PHONY: adore_cli_up
 adore_cli_up: adore_cli_setup adore_cli_start adore_cli_attach adore_cli_teardown 
 
