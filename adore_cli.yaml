@@ -29,7 +29,6 @@ services:
     volumes:
       - ./:/tmp/adore
       - /var/run/docker.sock:/var/run/docker.sock
-      - .bash_history:/home/${USER}/.bash_history
       - .bash_history:/home/${USER}/.zsh_history
       - .bash_history:/home/${USER}/.zsh_history.new
       - ${SOURCE_DIRECTORY}:/tmp/adore
