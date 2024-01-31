@@ -28,3 +28,6 @@ fzf
 inetutils-ping
 x11-apps
 cowsay
+gdb
+gdbserver
+clang-format
