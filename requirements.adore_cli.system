@@ -14,6 +14,9 @@
 
 # Development Tools
 
+# Plotting
+ros-iron-plotjuggler-ros                                                                                                           ros-iron-plotjuggler  
+
 ## Network debugging tools 
 telnet
 netcat
