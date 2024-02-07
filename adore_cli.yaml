@@ -14,8 +14,8 @@ services:
       - "BAG_OUTPUT_DIRECTORY=${SOURCE_DIRECTORY}/.log/.ros/bag_files"
       - "ROS_HOME=${SOURCE_DIRECTORY}/.log/.ros"
       - "HISTFILE=${SOURCE_DIRECTORY}/.zsh_history"
-      - "ROS_MASTER_URI=http://127.0.0.1:11311"
-      - "ROS_HOSTNAME=127.0.0.1"
+      #- "ROS_MASTER_URI=http://127.0.0.1:11311"
+      #- "ROS_HOSTNAME=127.0.0.1"
     depends_on:
       #- ros-master  #activate this option if you want to start roscore on startup of adore_cli container
       - plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
@@ -57,8 +57,8 @@ services:
       - "BAG_OUTPUT_DIRECTORY=${SOURCE_DIRECTORY}/.log/.ros/bag_files"
       - "ROS_HOME=${SOURCE_DIRECTORY}/.log/.ros"
       - "HISTFILE=${SOURCE_DIRECTORY}/.zsh_history"
-      - "ROS_MASTER_URI=http://127.0.0.1:11311"
-      - "ROS_HOSTNAME=127.0.0.1"
+      #- "ROS_MASTER_URI=http://127.0.0.1:11311"
+      #- "ROS_HOSTNAME=127.0.0.1"
     depends_on:
       # - ros-master  #activate this option if you want to start roscore on startup of adore_cli container
       - plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
