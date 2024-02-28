@@ -8,6 +8,8 @@ services:
     user: ${USER}
     hostname: ${HOSTNAME:-ADORe-CLI}
     network_mode: "host"
+    ipc: "host"
+    pid: "host"
     environment:
       - HOSTNAME=${HOSTNAME:-ADORe-CLI}
       - TEST_SCENARIOS=${TEST_SCENARIOS:-baseline_test.launch}
@@ -29,8 +31,8 @@ services:
     volumes:
       - ./:/tmp/adore
       - /var/run/docker.sock:/var/run/docker.sock
-      - .bash_history:/home/${USER}/.zsh_history
-      - .bash_history:/home/${USER}/.zsh_history.new
+      - .zsh_history:/home/${USER}/.zsh_history
+      - .zsh_history:/home/${USER}/.zsh_history.new
       - ${SOURCE_DIRECTORY}:/tmp/adore
       - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}
       - ${ADORE_CLI_MAKEFILE_PATH}/.ccache:/home/${USER}/.ccache
@@ -43,6 +45,8 @@ services:
     user: ${USER} 
     hostname: ${HOSTNAME:-ADORe-CLI}
     network_mode: "host"
+    ipc: "host"
+    pid: "host"
     environment:
       - HOSTNAME=${HOSTNAME:-ADORe-CLI}
       - ADORE_SOURCE_DIRECTORY=${SOURCE_DIRECTORY}
@@ -78,7 +82,7 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/docker.sock:/var/run/docker.sock
       - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.bash_history
-      - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.zsh_history
+      - ${ADORE_CLI_MAKEFILE_PATH}/.zsh_history:/home/${USER}/.zsh_history
       - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.zsh_history.new
       - ./:/tmp/adore_cli
       - ${SOURCE_DIRECTORY}:/tmp/adore
