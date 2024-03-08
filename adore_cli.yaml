@@ -8,6 +8,8 @@ services:
     user: ${USER}
     hostname: ${HOSTNAME:-ADORe-CLI}
     network_mode: "host"
+    ipc: "host"
+    pid: "host"
     environment:
       - HOSTNAME=${HOSTNAME:-ADORe-CLI}
       - TEST_SCENARIOS=${TEST_SCENARIOS:-baseline_test.launch}
@@ -38,6 +40,8 @@ services:
 
   adore_cli_core_x11_display:
     privileged: true
+    ipc: "host"
+    pid: "host"
     image: ${ADORE_CLI_PROJECT_X11_DISPLAY}:${ADORE_CLI_TAG:-latest}
     container_name: ${ADORE_CLI_PROJECT}
     user: ${USER} 
