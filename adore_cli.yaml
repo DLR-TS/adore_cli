@@ -47,8 +47,6 @@ services:
     user: ${USER} 
     hostname: ${HOSTNAME:-ADORe-CLI}
     network_mode: "host"
-    ipc: "host"
-    pid: "host"
     environment:
       - HOSTNAME=${HOSTNAME:-ADORe-CLI}
       - ADORE_SOURCE_DIRECTORY=${SOURCE_DIRECTORY}
