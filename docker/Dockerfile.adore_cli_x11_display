@@ -2,10 +2,15 @@ ARG ADORE_CLI_TAG=latest
 
 ARG REQUIREMENTS_FILE
 ARG USER
+ARG UID
+ARG GID
+
 
 FROM adore_cli_core:${ADORE_CLI_TAG} as adore_cli
 
 ARG USER
+ARG UID
+ARG GID
 ARG REQUIREMENTS_FILE="requirements.adore_cli_x11_display.ubuntu20.04.system"
 
 USER root
@@ -16,6 +21,16 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y $(sed '/^#/d' ${REQUIREMENTS_FILE} | sed '/^$/d') && \
     rm -rf /var/lib/apt/lists/*
 
+COPY docker/files/install_foxglove_studio.sh /tmp/install_foxglove_studio.sh
+WORKDIR /tmp
+RUN bash install_foxglove_studio.sh
+
+RUN mkdir -p /tmp/foxglove
+COPY docker/files/start_foxglove_studio.sh /tmp/foxglove/start_foxglove_studio.sh
+COPY docker/files/foxglove_studio_config /home/${USER}/.config/foxglove_studio_config
+
+RUN chown -R ${UID}:${GID} /tmp/foxglove
+RUN chown -R ${UID}:${GID} /home/${USER}/.config
 
 USER $USER
 WORKDIR /tmp/adore

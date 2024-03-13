@@ -28,6 +28,9 @@ if [[ -z ${ADORE_CLI_WORKING_DIRECTORY+x} ]]; then
     exit 1
 fi
 
+bash "/tmp/foxglove/start_foxglove_studio.sh"
+
+
 clear
 
 
@@ -35,7 +38,6 @@ bash "${SCRIPT_DIRECTORY}/git_repo_status.sh"
 cd "${ADORE_CLI_WORKING_DIRECTORY}"
 bash "${SCRIPT_DIRECTORY}/requirements_file_change_status.sh"
 bash "${SCRIPT_DIRECTORY}/adore_cli_motd.sh"
-
 printf "\n"
 
 #echo " SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
