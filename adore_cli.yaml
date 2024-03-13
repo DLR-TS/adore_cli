@@ -81,9 +81,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/docker.sock:/var/run/docker.sock
-      - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.bash_history
       - ${ADORE_CLI_MAKEFILE_PATH}/.zsh_history:/home/${USER}/.zsh_history
-      - ${ADORE_CLI_MAKEFILE_PATH}/.bash_history:/home/${USER}/.zsh_history.new
       - ./:/tmp/adore_cli
       - ${SOURCE_DIRECTORY}:/tmp/adore
       - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}
