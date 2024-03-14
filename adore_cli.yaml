@@ -4,7 +4,7 @@ services:
   adore_cli:
     privileged: true
     image: ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG:-latest}
-    container_name: ${ADORE_CLI_PROJECT}
+    container_name: ${ADORE_CLI_PROJECT}_base
     user: adore_cli
     hostname: ADORe-CLI
     network_mode: "host"
@@ -16,9 +16,9 @@ services:
       - "HISTFILE=${SOURCE_DIRECTORY}/.zsh_history"
       #- "ROS_MASTER_URI=http://127.0.0.1:11311"
       #- "ROS_HOSTNAME=127.0.0.1"
-    depends_on:
+      #depends_on:
       #- ros-master  #activate this option if you want to start roscore on startup of adore_cli container
-      - plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
+      #- plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
     build:
       context: ${ADORE_CLI_MAKEFILE_PATH}
       network: host
@@ -59,9 +59,9 @@ services:
       - "HISTFILE=${SOURCE_DIRECTORY}/.zsh_history"
       #- "ROS_MASTER_URI=http://127.0.0.1:11311"
       #- "ROS_HOSTNAME=127.0.0.1"
-    depends_on:
+      #depends_on:
       # - ros-master  #activate this option if you want to start roscore on startup of adore_cli container
-      - plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
+      #- plotlabserver  #activate this option if you want to start plotlabserver automatically with adore_cli container
     build:
       context: ${ADORE_CLI_MAKEFILE_PATH}
       network: host

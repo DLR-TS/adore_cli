@@ -127,14 +127,16 @@ adore_cli_setup:
     make down || true
 
 .PHONY: adore_cli_teardown
-adore_cli_teardown:
+adore_cli_teardown: stop_apt_cacher_ng
 	@echo "Running adore_cli teardown..."
+	cd ${PLOTLABSERVER_MAKEFILE_PATH} && make down 
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} down || true
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} rm -f || true
 
 .PHONY: adore_cli_start
 adore_cli_start:
 	@echo "Running adore_cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
+	cd ${PLOTLABSERVER_MAKEFILE_PATH} && make up-detached 
 	cd ${ADORE_CLI_MAKEFILE_PATH} && \
     docker compose -f ${DOCKER_COMPOSE_FILE} up adore_cli_x11_display \
       --force-recreate \
