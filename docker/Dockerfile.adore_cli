@@ -28,7 +28,8 @@ RUN apt-get update && \
                                                 python3-pip \
                                                 ros-iron-foxglove-bridge \ 
                                                 file \
-                        			&& \
+                        		        xterm \	
+						&& \
     rm -rf /var/lib/apt/lists/*
 
 RUN python3 -m pip install setuptools==58.2.0 
