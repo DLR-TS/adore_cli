@@ -37,6 +37,16 @@ RUN python3 -m pip install setuptools==58.2.0
 RUN useradd --create-home ${USER}
 
 
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:sumo/stable && \
+    apt-get update && \
+    apt-get install -y sumo
+
+#RUN add-apt-repository -y ppa:sumo/stable
+#RUN apt-get update
+#RUN apt-get install sumo sumo-tools sumo-doc
+
 RUN usermod -u ${UID} ${USER} && groupmod -g ${GID} ${USER}
 RUN chown -R ${UID}:${GID} $$HOME | true
 
