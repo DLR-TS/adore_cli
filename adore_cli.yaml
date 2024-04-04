@@ -4,7 +4,7 @@ services:
   adore_cli_core:
     privileged: true
     image: ${ADORE_CLI_PROJECT}:${ADORE_CLI_TAG:-latest}
-    container_name: ${ADORE_CLI_PROJECT}
+    container_name: ${ADORE_CLI_PROJECT}_base
     user: ${USER}
     hostname: ${HOSTNAME:-ADORe-CLI}
     network_mode: "host"
