@@ -57,9 +57,6 @@ $(shell mkdir -p "${SOURCE_DIRECTORY}/.log")
 .PHONY: adore_cli_up
 adore_cli_up: adore_cli_setup adore_cli_start adore_cli_attach adore_cli_teardown 
 
-.PHONY: adore_cli_up_
-adore_cli_up_: adore_cli_setup adore_cli_start 
-
 .PHONY: cli
 cli: adore_cli ## Same as 'make adore_cli' for the lazy 
 
@@ -122,7 +119,7 @@ adore_cli_teardown_setup:
 adore_cli_start:
 	@echo "Running adore_cli start... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 	cd ${ADORE_CLI_MAKEFILE_PATH} && \
-    docker compose  -f ${DOCKER_COMPOSE_FILE} up ${ADORE_CLI_PROJECT_X11_DISPLAY} \
+    docker compose  -f ${DOCKER_COMPOSE_FILE} up \
       --force-recreate \
       --renew-anon-volumes \
       --detach;
