@@ -54,8 +54,14 @@ ADORE_CLI_SUBMODULES:=make_gadgets apt_cacher_ng_docker
 $(shell mkdir -p "${ADORE_CLI_MAKEFILE_PATH}/.ccache")
 $(shell mkdir -p "${SOURCE_DIRECTORY}/.log")
 
+.PHONY: start
+start: adore_cli_setup adore_cli_start adore_cli_attach adore_cli_teardown ## OFFLINE start of adore cli 
+
+.PHONY: stop
+stop: stop_adore_cli 
+
 .PHONY: adore_cli_up
-adore_cli_up: adore_cli_setup adore_cli_start adore_cli_attach adore_cli_teardown 
+adore_cli_up: build_fast_adore_cli_core adore_cli_setup adore_cli_start adore_cli_attach adore_cli_teardown 
 
 .PHONY: cli
 cli: adore_cli ## Same as 'make adore_cli' for the lazy 
@@ -97,7 +103,7 @@ clean_adore_cli: ## Clean adore_cli docker context
 .PHONY: adore_cli_setup
 adore_cli_setup: 
 	@echo "Running adore_cli setup... SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
-	make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk build_fast_adore_cli_core
+#	make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk build_fast_adore_cli_core
 	@mkdir -p ${ADORE_CLI_MAKEFILE_PATH}/.log
 	@mkdir -p ${ADORE_CLI_MAKEFILE_PATH}/.ccache
 	@touch ${ADORE_CLI_MAKEFILE_PATH}/.bash_history
