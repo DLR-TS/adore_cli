@@ -27,6 +27,8 @@ services:
     volumes:
       - ./:/tmp/adore
       - /var/run/docker.sock:/var/run/docker.sock
+      - .zsh_history:/home/${USER}/.zsh_history
+      - .zsh_history:/home/${USER}/.zsh_history.new
       - ${SOURCE_DIRECTORY}:/tmp/adore
       - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}
       - ${ADORE_CLI_MAKEFILE_PATH}/.ccache:/home/${USER}/.ccache
@@ -73,6 +75,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - /var/run/docker.sock:/var/run/docker.sock
+      - ${ADORE_CLI_MAKEFILE_PATH}/.zsh_history:/home/${USER}/.zsh_history
       - ./:/tmp/adore_cli
       - ${SOURCE_DIRECTORY}:/tmp/adore
       - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}
