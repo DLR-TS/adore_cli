@@ -1,38 +1,30 @@
 
-ARG USER
+ARG USE
 ARG UID
 ARG GID
-
-#FROM ros:iron-ros-core-jammy AS adore_cli
+ARG REQUIREMENTS_FILE
+ARG PYTHON_REQUIREMENTS_FILE
 
 FROM ros:iron-ros-core-jammy AS adore_cli
 
 ARG USER
 ARG UID
 ARG GID
+ARG REQUIREMENTS_FILE="requirements.adore_cli.ubuntu22.04.system"
+ARG PYTHON_REQUIREMENTS_FILE="requirements.adore_cli.pip3"
 
-#RUN apt-get update && cat /etc/os-release && apt-cache search setuptools && exit 1
+COPY docker/files/${REQUIREMENTS_FILE} /tmp
+WORKDIR /tmp
+ENV DEBIAN_FRONTEND=noninteractive
+RUN --mount=target=/var/lib/apt/lists,type=cache,sharing=locked \
+    --mount=target=/var/cache/apt,type=cache,sharing=locked \
+    rm -f /etc/apt/apt.conf.d/docker-clean && \
+    apt-get update && \
+    apt-get install --no-install-recommends -y $(sed '/^#/d' ${REQUIREMENTS_FILE} | sed '/^$/d')
 
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y \
-                                                rsyslog \
-                                                ccache \
-                                                sudo \
-                                                apt-file \
-                                                python3-rospy \
-                                                python3-colcon-common-extensions \
-                                                cmake \
-                                                ros-dev-tools \
-                                                vim \
-                                                ros-iron-ros-base \
-                                                python3-pip \
-                                                ros-iron-foxglove-bridge \ 
-                                                file \
-                        		        xterm \	
-						&& \
-    rm -rf /var/lib/apt/lists/*
-
-RUN python3 -m pip install setuptools==58.2.0 
+COPY docker/files/${PYTHON_REQUIREMENTS_FILE} /tmp
+RUN --mount=type=cache,target=/root/.cache/pip \
+    python3 -m pip install -r ${PYTHON_REQUIREMENTS_FILE}
 
 RUN useradd --create-home ${USER}
 
@@ -42,15 +34,9 @@ RUN chown -R ${UID}:${GID} $$HOME | true
 
 ARG ZSH_CUSTOM=/home/${USER}/.oh-my-zsh/custom
 
-
-USER root
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y zsh git curl && \
-    rm -rf /var/lib/apt/lists/*
-
 USER ${USER}
 WORKDIR /home/${USER}
-RUN zsh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+RUN zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
 

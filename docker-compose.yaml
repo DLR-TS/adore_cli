@@ -10,12 +10,3 @@ services:
     extends:
       file: ${ADORE_CLI_MAKEFILE_PATH}/adore_cli.yaml
       service: adore_cli_core_x11_display
-  
-  foxglove_studio:
-    container_name: foxglove_studio 
-    image: ghcr.io/foxglove/studio:latest
-    volumes:
-      - ${SOURCE_DIRECTORY}:${SOURCE_DIRECTORY}
-    ports:
-      - "8080:8080"
-    network_mode: host

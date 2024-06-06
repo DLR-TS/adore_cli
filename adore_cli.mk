@@ -52,6 +52,8 @@ ADORE_CLI_SUBMODULES:=make_gadgets apt_cacher_ng_docker
 #$(call include_submodules,${ADORE_CLI_SUBMODULES_PATH}, ${ADORE_CLI_SUBMODULES})
 
 $(shell mkdir -p "${ADORE_CLI_MAKEFILE_PATH}/.ccache")
+$(shell touch "${ADORE_CLI_MAKEFILE_PATH}/.zsh_history")
+$(shell touch "${ADORE_CLI_MAKEFILE_PATH}/.bash_history")
 $(shell mkdir -p "${SOURCE_DIRECTORY}/.log")
 
 .PHONY: start
@@ -69,8 +71,8 @@ cli: adore_cli ## Same as 'make adore_cli' for the lazy
 .PHONY: stop_adore_cli
 stop_adore_cli: docker_host_context_check adore_cli_teardown ## Stop adore_cli docker context if it is running
 
-.PHONY: stop_adore_cli_setup
-stop_adore_cli_setup: docker_host_context_check adore_cli_teardown_setup
+.PHONY: stop_adore_cli
+stop_adore_cli: docker_host_context_check adore_cli_teardown
 
 .PHONY: adore_cli 
 adore_cli: docker_host_context_check build_fast_adore_cli_core ## Start adore_cli context or attach to it if already running
@@ -115,10 +117,6 @@ adore_cli_teardown:
 	@echo "Running adore_cli teardown..."
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} down || true
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} rm -f || true
-
-.PHONY: adore_cli_teardown_setup
-adore_cli_teardown_setup:
-	@echo "Running adore_cli setup teardown..."
 	@cd ${ADORE_CLI_MAKEFILE_PATH} && docker compose -f ${DOCKER_COMPOSE_FILE} stop || true
 
 .PHONY: adore_cli_start
@@ -133,7 +131,7 @@ adore_cli_start:
 
 
 .PHONY: adore_cli_start_headless
-adore_cli_start_headless:
+adore_cli_start_headless: adore_cli_setup
 	export DISPLAY_MODE=headless && make --file=${ADORE_CLI_MAKEFILE_PATH}/adore_cli.mk adore_cli_start 
 
 .PHONY: adore_cli_attach
