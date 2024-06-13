@@ -6,3 +6,6 @@ catkin_workspace/
 adore_cli
 .ccache
 **.jpg
+.ccache
+adore_cli_core
+build
