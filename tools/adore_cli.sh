@@ -28,6 +28,8 @@ if [[ -z ${ADORE_CLI_WORKING_DIRECTORY+x} ]]; then
     exit 1
 fi
 
+
+
 clear
 
 
@@ -40,7 +42,6 @@ printf "\n"
 
 #echo " SOURCE_DIRECTORY: ${SOURCE_DIRECTORY}"
 #echo " ADORE_CLI_WORKING_DIRECTORY: ${ADORE_CLI_WORKING_DIRECTORY}"
-#echo " CATKIN_WORKSPACE_DIRECTORY: ${CATKIN_WORKSPACE_DIRECTORY}"
 
 
 
@@ -50,6 +51,7 @@ if [ -z ${VEHICLE_NAME+x} ]; then
 else 
     printf "  Vehicle environment set to: ${VEHICLE_NAME}\n\n"; 
 fi
+
 zsh
 
 ##source /opt/ros/iron/setup.zsh

@@ -152,4 +152,8 @@ images_adore_cli: ## Returns all docker images for adore_cli
 	@echo "${ADORE_CLI_IMAGE}"
 	@echo "${ADORE_CLI_IMAGE_X11_DISPLAY}"
 
+.PHONY: take_ownership_adore_cli
+take_ownership_adore_cli: ## Takes ownership of the ADORe CLI docker image. The ADORe cli docker image is owned by the user that created it. This target takes ownership of it.
+	cd ${ADORE_CLI_MAKEFILE_PATH} && make own
+
 endif
