@@ -28,6 +28,7 @@ ros-dev-tools
 python3-venv
 python3-pip
 python3-colcon-common-extensions
+python3-setuptools
 
 # Debug
 gdb
